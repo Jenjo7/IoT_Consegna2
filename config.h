@@ -6,7 +6,8 @@
 #define LDIST1 9
 #define LDIST2 10
 #define LR 11
-#define TOUCH 3
-#define CLOSE 2
+#define TOUCH 2
+#define CLOSE 3
 #define PIR 7
-
+#define PROXTRIGG 4
+#define PROXECHO 5

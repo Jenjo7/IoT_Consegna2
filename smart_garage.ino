@@ -7,6 +7,10 @@
  * ===================================================================
  */
 #include "config.h"
+#include "ButtonImpl.h"
+#include "LedExt.h"
+#include "Led.h"
+#include "ProximitySensor.h"
 
 
 void setup() {
