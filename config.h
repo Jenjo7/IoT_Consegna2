@@ -9,5 +9,5 @@
 #define TOUCH 2
 #define CLOSE 3
 #define PIR 7
-#define PROXTRIGG 4
+#define PROXTRIG 4
 #define PROXECHO 5
