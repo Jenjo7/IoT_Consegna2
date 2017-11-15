@@ -18,7 +18,8 @@
 //LedExt* led1, led2;
 //ProximitySensor* prox;
 Pir* pir;
-//Button* touch, closing;
+//Button* touch, closing
+bool state = false;
 
 void setup() {
   Serial.begin(9600);
@@ -33,5 +34,10 @@ void setup() {
 }
 
 void loop() {
+  if(state) {
+    delay(4000);
+    state = false;
+  }
+  
   Serial.println(pir->isDetected());
 }
