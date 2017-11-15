@@ -7,6 +7,6 @@ Pir::Pir(int pin) {
 }
 
 bool Pir::isDetected() {
-  return analogRead(pin) == HIGH;
+  return digitalRead(pin) == HIGH;
 }
 
