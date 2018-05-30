@@ -11,3 +11,5 @@
 #define PIR 7
 #define PROXTRIG 4
 #define PROXECHO 5
+
+enum State {INI, OPN, PRK, STP, CHS};
