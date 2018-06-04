@@ -13,6 +13,11 @@
 #include "LedExt.h"
 #include "Sonar.h"
 #include "Pir.h"
+#include "Init.h"
+#include "OpenGarage.h"
+#include "Parking.h"
+#include "Stop.h"
+#include "CloseGarage.h"
 
 #include "Scheduler.h"
 
@@ -23,29 +28,31 @@ volatile State state;
 //ProximitySensor* prox;
 Pir* pir;
 //Button* touch, closing
-bool state = false;
+bool st = false;
 Scheduler sched;
 
 void setup() {
 
+  sched.init(10);
+
   Task* t0 = new Init();
-  t0->init(50);
+  t0->init(10);
   sched.addTask(t0);
 
-  Task* t1 = new OpenGarage();
-  t1->init(10);
+  Task* t1 = new OpenGarage(LR, PIR);
+  t1->init(100);
   sched.addTask(t1);
 
-  Task* t2 = new Parking();
-  t2->init(10);
+  Task* t2 = new Parking( LDIST1,  LDIST2,  LR,  CLOSE,  TOUCH, PROXECHO,  PROXTRIG);
+  t2->init(50);
   sched.addTask(t2);
 
-  Task* t3= new Stop();
+  Task* t3= new Stop(LR);
   t3->init(10);
   sched.addTask(t3);
 
-  Task* t4 = new CloseGarage();
-  t4->init(10);
+  Task* t4 = new CloseGarage(LR);
+  t4->init(100);
   sched.addTask(t4);
 
   state = INI;
@@ -53,7 +60,7 @@ void setup() {
   Serial.begin(9600);
   LedExt* led1 = new LedExt(LDIST1);
   LedExt* led2 = new LedExt(LDIST2);
-  Led* ledr = new Led(LR);
+  LedExt* ledr = new LedExt(LR);
   Sonar* prox = new Sonar(PROXECHO, PROXTRIG);
   pir = new Pir(PIR);
   Button* touch = new ButtonImpl(TOUCH);
@@ -62,10 +69,11 @@ void setup() {
 }
 
 void loop() {
-  if(state) {
-    delay(4000);
-    state = false;
-  }
-  
-  Serial.println(pir->isDetected());
+//  if(st) {
+//    delay(4000);
+//    st = false;
+//  }
+//  
+//  Serial.println(pir->isDetected());
+  sched.schedule();
 }
