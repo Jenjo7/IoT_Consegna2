@@ -47,7 +47,7 @@ void setup() {
   t2->init(50);
   sched.addTask(t2);
 
-  Task* t3= new Stop(LR);
+  Task* t3= new Stop(LR, PROXECHO,  PROXTRIG);
   t3->init(10);
   sched.addTask(t3);
 

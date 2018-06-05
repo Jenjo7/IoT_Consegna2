@@ -34,7 +34,7 @@ void Parking::tick() {
     float dist = prox->getDistance();
     Serial.println(dist);
     int distInt = (int) (dist * 100);
-    if(dist > DIST-MAX) {
+    if(dist > DISTMAX) {
       led1->setIntensity(0);
       led2->setIntensity(0);
     } else if(dist <= DISTMAX && dist > 0.55) {
