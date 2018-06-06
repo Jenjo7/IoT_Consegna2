@@ -7,6 +7,10 @@ extern volatile State state;
 int intensity = 0;
 int inc = 0;
 
+void changeState(State st) {
+  inc = intensity = 0;
+  state = st;
+}
 
 
 OpenGarage::OpenGarage(int ledPin, int pirPin){
@@ -32,19 +36,19 @@ void OpenGarage::tick() {
     } else {
       if(inc++ <= WAITTIME) {
         if(pir->isDetected()) {
-          state = PRK;
+          changeState(PRK);
         }
       } else {
-        inc = 0;
-        intensity = 0;
-        state = CLS;
+        changeState(CLS);
       }
     }
   }
 }
 
-//void fade() {
-//  fadeLed->setIntensity(intensity);
+
+
+//void OpenGarage::fade() {
+//  this->fadeLed->setIntensity(intensity);
 //  intensity += BRIGHT;
 //}
 
