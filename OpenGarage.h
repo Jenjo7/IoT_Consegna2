@@ -7,14 +7,13 @@
 #include "Pir.h"
 
 class OpenGarage: public Task {
-
+ 
   private:
     int ledPin;
     int pirPin;
     Pir* pir;
     LedExt* fadeLed;
-    void fade();
-    
+   
   public:
      OpenGarage(int ledPin, int pirPin);
      void init(int period);
