@@ -8,12 +8,6 @@
 extern volatile State state;
 
 Parking::Parking(int led1, int led2, int lr, int touch, int cls, int echo, int trig) {
-//  LedExt* led1;
-//  LedExt* led2;
-//  LedExt* lr;
-//  Button* cls;
-//  Button* touch;
-//  ProximitySensor* prox;
   this->led1 = new LedExt(led1, 0);
   this->led2 = new LedExt(led2, 0);
   this->lr = new LedExt(lr);
@@ -51,10 +45,12 @@ void Parking::tick() {
       Serial.println("OK CAN STOP");
        if(MsgService.isMsgAvailable()) {
         if(MsgService.receiveMsg()->getContent() == "stop") {
-        state = STP;
-        Serial.println("ricevuto");
-     }
-    }
+          state = STP;
+          led1->setIntensity(0);
+          led2->setIntensity(0);
+          Serial.println("ricevuto");
+        }
+      }
     }
     
   }
