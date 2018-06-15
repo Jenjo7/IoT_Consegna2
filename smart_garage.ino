@@ -36,7 +36,7 @@ void setup() {
   sched.init(10);
 
   Task* t0 = new Init();
-  t0->init(10);
+  t0->init(100);
   sched.addTask(t0);
 
   Task* t1 = new OpenGarage(LR, PIR);
@@ -44,11 +44,11 @@ void setup() {
   sched.addTask(t1);
 
   Task* t2 = new Parking( LDIST1,  LDIST2,  LR,  CLOSE,  TOUCH, PROXECHO,  PROXTRIG);
-  t2->init(50);
+  t2->init(100);
   sched.addTask(t2);
 
   Task* t3= new Stop(LR, PROXECHO,  PROXTRIG);
-  t3->init(10);
+  t3->init(100);
   sched.addTask(t3);
 
   Task* t4 = new CloseGarage(LR);
