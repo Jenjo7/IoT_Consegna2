@@ -33,10 +33,10 @@ Scheduler sched;
 
 void setup() {
 
-  sched.init(10);
+  sched.init(100);
 
   Task* t0 = new Init();
-  t0->init(100);
+  t0->init(200);
   sched.addTask(t0);
 
   Task* t1 = new OpenGarage(LR, PIR);
@@ -69,11 +69,5 @@ void setup() {
 }
 
 void loop() {
-//  if(st) {
-//    delay(4000);
-//    st = false;
-//  }
-//  
-//  Serial.println(pir->isDetected());
   sched.schedule();
 }
