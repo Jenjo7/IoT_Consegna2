@@ -26,33 +26,43 @@ void Parking::init(int period) {
 void Parking::tick() {
   if(state == PRK) {
     float dist = prox->getDistance();
-    Serial.println(dist);
     int distInt = (int) (dist * 100);
+    String msg;
     if(dist > DISTMAX) {
       led1->setIntensity(0);
       led2->setIntensity(0);
-    } else if(dist <= DISTMAX && dist > 0.55) {
-      Serial.println("primoIf");
-      int value = (int) map(distInt, 100, 55, 0, MAXINTENSITY);
-      led1->setIntensity(value);
-      led2->setIntensity(0);
-    } else if(dist <= 0.55 && dist > 0.10) {
-      Serial.println("secondoIf");
-      int value = (int) map(distInt, 55, 10, 0, MAXINTENSITY);
-      led1->setIntensity(MAXINTENSITY);
-      led2->setIntensity(value);
+      msg = "D " + String(dist);
+    } else if(dist <= DISTMAX && dist > DISTMIN) {
+      int value1 = dist <= 0.55 ? MAXINTENSITY : (int) map(distInt, 100, 55, 0, MAXINTENSITY);
+      int value2 = dist <= 0.55 ? (int) map(distInt, 55, 10, 0, MAXINTENSITY) : 0;
+//      Serial.println(String(value1) + " " + String(value2));
+      led1->setIntensity(value1);
+      led2->setIntensity(value2);
+      msg = "D " + String(dist);
     } else if(dist <= DISTMIN) {
-      Serial.println("OK CAN STOP");
-       if(MsgService.isMsgAvailable()) {
+//      Serial.println("OK CAN STOP");
+//       if(MsgService.isMsgAvailable()) {
+//        if(MsgService.receiveMsg()->getContent() == "stop") {
+//          state = STP;
+//          led1->setIntensity(0);
+//          led2->setIntensity(0);
+//          Serial.println("ricevuto");
+//        }
+//      }
+        msg = "O";
+    }
+    if(touch->isPressed()) {
+      msg = "T";
+    }
+    if(MsgService.isMsgAvailable()) {
         if(MsgService.receiveMsg()->getContent() == "stop") {
           state = STP;
           led1->setIntensity(0);
           led2->setIntensity(0);
-          Serial.println("ricevuto");
         }
-      }
     }
-    
+    MsgService.sendMsg(msg);
+    Serial.flush();
   }
 }
 
