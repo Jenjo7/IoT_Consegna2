@@ -7,12 +7,6 @@
  * ===================================================================
  */
 #include "config.h"
-#include "ButtonImpl.h"
-#include "LedExt.h"
-#include "Led.h"
-#include "LedExt.h"
-#include "Sonar.h"
-#include "Pir.h"
 #include "Init.h"
 #include "OpenGarage.h"
 #include "Parking.h"
@@ -23,12 +17,6 @@
 
 volatile State state;
 
-//Led* ledr;
-//LedExt* led1, led2;
-//ProximitySensor* prox;
-Pir* pir;
-//Button* touch, closing
-bool st = false;
 Scheduler sched;
 
 void setup() {
@@ -55,17 +43,7 @@ void setup() {
   t4->init(100);
   sched.addTask(t4);
 
-  state = INI;
-  
-  Serial.begin(9600);
-  LedExt* led1 = new LedExt(LDIST1);
-  LedExt* led2 = new LedExt(LDIST2);
-  LedExt* ledr = new LedExt(LR);
-  Sonar* prox = new Sonar(PROXECHO, PROXTRIG);
-  pir = new Pir(PIR);
-  Button* touch = new ButtonImpl(TOUCH);
-  Button* closing = new ButtonImpl(CLOSE);
-  
+  state = INI;  
 }
 
 void loop() {
