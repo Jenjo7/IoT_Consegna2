@@ -51,6 +51,15 @@ void Parking::tick() {
 //      }
         msg = "O";
     }
+    if(cls->isPressed()) {
+      if(dist <= DISTCLOSE) {
+        state = STP;
+        led1->setIntensity(0);
+        led2->setIntensity(0);
+      } else {
+        msg = "F";
+      }
+    }
     if(touch->isPressed()) {
       msg = "T";
     }

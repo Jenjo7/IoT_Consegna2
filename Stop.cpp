@@ -18,15 +18,20 @@ void Stop::init(int period) {
 void Stop::tick() {
   if(state == STP) {
     float dist = prox->getDistance();
-    if(dist <= DISTMIN) {
+    String msg = dist <= DISTMIN ? "K" : dist <= DISTCLOSE ? "G" : "F";
+    state =  dist <= DISTCLOSE ? CLS : STP;
+//    if(dist <= DISTMIN) {
+////      Serial.flush();
+//      MsgService.sendMsg("K");
 //      Serial.flush();
-      MsgService.sendMsg("K");
-      Serial.flush();
-      state = CLS;
-    } 
-    if(dist > DISTMIN) {
-      MsgService.sendMsg("F");
-    }
+//      state = CLS;
+//    } 
+//    
+//    if(dist > DISTMIN) {
+//      MsgService.sendMsg("F");
+//    }
+    MsgService.sendMsg(msg);
+    Serial.flush();
   }
 }
 
