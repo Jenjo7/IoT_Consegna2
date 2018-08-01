@@ -20,16 +20,6 @@ void Stop::tick() {
     float dist = prox->getDistance();
     String msg = dist <= DISTMIN ? "K" : dist <= DISTCLOSE ? "G" : "F";
     state =  dist <= DISTCLOSE ? CLS : STP;
-//    if(dist <= DISTMIN) {
-////      Serial.flush();
-//      MsgService.sendMsg("K");
-//      Serial.flush();
-//      state = CLS;
-//    } 
-//    
-//    if(dist > DISTMIN) {
-//      MsgService.sendMsg("F");
-//    }
     MsgService.sendMsg(msg);
     Serial.flush();
   }
