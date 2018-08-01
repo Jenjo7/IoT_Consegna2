@@ -20,7 +20,8 @@ void Init::tick() {
     if(MsgService.isMsgAvailable()) {
       if(MsgService.receiveMsg()->getContent() == "open") {
         state = OPN;
-        Serial.println("ricevuto");
+        MsgService.sendMsg("W");
+//        Serial.println("ricevuto");
     }
   }
     

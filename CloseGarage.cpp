@@ -19,8 +19,8 @@ void CloseGarage::tick() {
   if(state == CLS) {
     if(intensitys >= 0) {
 //     fadeLed->switchOn();
-       Serial.println(intensitys == MAXINTENSITY ? "close" : "");
-       Serial.println(intensitys);
+//       Serial.println(intensitys == MAXINTENSITY ? "close" : "");
+//       Serial.println(intensitys);
        fadeLed->setIntensity(intensitys);
        intensitys -= BRIGHT;
     } else {

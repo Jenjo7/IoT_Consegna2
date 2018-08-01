@@ -27,10 +27,10 @@ void OpenGarage::init(int period){
 
 void OpenGarage::tick() {
   if(state == OPN) {
-    Serial.println(intensity == 0 ? "open" : "");
+//    Serial.println(intensity == 0 ? "open" : "");
     if(intensity <= MAXINTENSITY) {
        fadeLed->switchOn();
-       Serial.println(intensity);
+//       Serial.println(intensity);
        fadeLed->setIntensity(intensity);
        intensity += BRIGHT;
     } else {
