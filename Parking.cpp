@@ -40,15 +40,6 @@ void Parking::tick() {
       led2->setIntensity(value2);
       msg = "D " + String(dist);
     } else if(dist <= DISTMIN) {
-//      Serial.println("OK CAN STOP");
-//       if(MsgService.isMsgAvailable()) {
-//        if(MsgService.receiveMsg()->getContent() == "stop") {
-//          state = STP;
-//          led1->setIntensity(0);
-//          led2->setIntensity(0);
-//          Serial.println("ricevuto");
-//        }
-//      }
         msg = "O";
     }
     if(cls->isPressed()) {
