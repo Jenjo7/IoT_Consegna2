@@ -26,6 +26,7 @@ void OpenGarage::init(int period){
 }
 
 void OpenGarage::tick() {
+//OpeningGarage
   if(state == OPN) {
 //    Serial.println(intensity == 0 ? "open" : "");
     if(intensity <= MAXINTENSITY) {
@@ -33,6 +34,7 @@ void OpenGarage::tick() {
 //       Serial.println(intensity);
        fadeLed->setIntensity(intensity);
        intensity += BRIGHT;
+//WaitForDetect
     } else {
       if(inc++ <= WAITTIME) {
         if(pir->isDetected()) {
