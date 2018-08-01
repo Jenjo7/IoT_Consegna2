@@ -1,6 +1,7 @@
 #include "Stop.h"
 #include "Arduino.h"
 #include "config.h"
+#include "MsgService.h"
 
 #include "Sonar.h"
 
@@ -16,11 +17,16 @@ void Stop::init(int period) {
 
 void Stop::tick() {
   if(state == STP) {
-    int dist = (int) (prox->getDistance()*100);
-    if(dist <= 10) {
-      Serial.println("Ok");
+    float dist = prox->getDistance();
+    if(dist <= DISTMIN) {
+//      Serial.flush();
+      MsgService.sendMsg("K");
+      Serial.flush();
       state = CLS;
     } 
+    if(dist > DISTMIN) {
+      MsgService.sendMsg("F");
+    }
   }
 }
 
